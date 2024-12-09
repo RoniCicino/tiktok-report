@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok Authorization</title>
+</head>
+<body>
+  <h1>Autorizar TikTok</h1>
+  <p>Clique no botão abaixo para autorizar o aplicativo no TikTok:</p>
+  <button id="authorize-btn">Autorizar TikTok</button>
+
+  <script>
+    // URL de autorização do TikTok
+    const tiktokAuthorizationUrl = `
+      https://business-api.tiktok.com/open_api/v1.3/oauth/authorize?app_id=743292597010008
+      &redirect_uri=https://ronicicino.github.io/tiktok-report/auth_callback.html
+      &scope=ad_account reporting measurement
+      &state=1234
+    `.replace(/\s+/g, ""); // Remove espaços extras
+
+    // Redireciona o usuário ao clicar no botão
+    document.getElementById("authorize-btn").addEventListener("click", () => {
+      window.location.href = tiktokAuthorizationUrl;
+    });
+  </script>
+</body>
+</html>

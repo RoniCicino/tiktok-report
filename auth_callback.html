@@ -15,11 +15,31 @@
     const authCode = params.get("auth_code");
     const error = params.get("error");
 
-    // Exibe o código ou mensagem de erro
+    // Exibe o código ou mensagem de erro na página
     const messageElement = document.getElementById("message");
     if (authCode) {
       messageElement.innerHTML = `<strong>Authorization Code:</strong> ${authCode}`;
       console.log("Authorization Code:", authCode);
+
+      // Envia o código para o servidor
+      fetch("http://localhost:5000/save_auth_code", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ auth_code: authCode }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            messageElement.innerHTML += "<br><strong>Authorization Code enviado com sucesso ao servidor!</strong>";
+          } else {
+            messageElement.innerHTML += "<br><strong>Falha ao enviar o Authorization Code para o servidor.</strong>";
+          }
+        })
+        .catch((error) => {
+          console.error("Erro ao enviar o Authorization Code:", error);
+          messageElement.innerHTML += "<br><strong>Erro ao enviar o Authorization Code.</strong>";
+        });
     } else if (error) {
       messageElement.innerHTML = `<strong>Erro:</strong> ${error}`;
     } else {
