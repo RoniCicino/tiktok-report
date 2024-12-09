@@ -11,15 +11,17 @@
   <button id="authorize-btn">Autorizar TikTok</button>
 
   <script>
-    // URL de autorização do TikTok
+    // URL de autorização corrigida
     const tiktokAuthorizationUrl = `
-      https://business-api.tiktok.com/open_api/v1.3/oauth/authorize?app_id=743292597010008
-      &redirect_uri=https://ronicicino.github.io/tiktok-report/auth_callback.html
-      &scope=ad_account reporting measurement
-      &state=1234
-    `.replace(/\s+/g, ""); // Remove espaços extras
+        https://business-api.tiktok.com/open_api/v1.3/oauth/authorize?
+        app_id=743292597010008
+        &redirect_uri=https%3A%2F%2Fronicicino.github.io%2Ftiktok-report%2Fauth_callback.html
+        &scope=ad_account%20reporting%20measurement
+        &state=1234
+        `.replace(/\s+/g, ""); // Remove espaços extras
 
-    // Redireciona o usuário ao clicar no botão
+
+    // Redireciona ao clicar no botão
     document.getElementById("authorize-btn").addEventListener("click", () => {
       window.location.href = tiktokAuthorizationUrl;
     });
