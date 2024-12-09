@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authorization Code Callback</title>
+</head>
+<body>
+  <h1>Authorization Code Callback</h1>
+  <p id="message">Processando...</p>
+
+  <script>
+    // Captura o código da URL
+    const params = new URLSearchParams(window.location.search);
+    const authCode = params.get("auth_code");
+    const error = params.get("error");
+
+    // Exibe o código ou mensagem de erro
+    const messageElement = document.getElementById("message");
+    if (authCode) {
+      messageElement.innerHTML = `<strong>Authorization Code:</strong> ${authCode}`;
+      console.log("Authorization Code:", authCode);
+    } else if (error) {
+      messageElement.innerHTML = `<strong>Erro:</strong> ${error}`;
+    } else {
+      messageElement.innerHTML = "Nenhum Authorization Code encontrado.";
+    }
+  </script>
+</body>
+</html>
